@@ -1,0 +1,74 @@
+# ==========================================
+# IDE / Editor Settings
+# ==========================================
+.idea/
+.vscode/
+*.swp
+*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.user
+.classpath
+.project
+.settings/
+bin/
+nbproject/
+*.iml
+
+# ==========================================
+# OS Files
+# ==========================================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ==========================================
+# Java & Maven (Backend)
+# ==========================================
+**/target/
+**/*.jar
+**/*.war
+**/*.ear
+**/*.class
+.mvn/wrapper/
+!**/mvnw
+!**/mvnw.cmd
+.apt_generated/
+.metadata/
+.springBeans/
+*.log
+*.log.*
+.env*
+
+# ==========================================
+# Node.js & Angular (Frontend)
+# ==========================================
+**/node_modules/
+**/dist/
+**/.angular/
+.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+cypress/videos/
+cypress/screenshots/
+.nycrc
+.nyc_output
+
+# ==========================================
+# Docker & Database
+# ==========================================
+# Ignore local database data directories if mapped as local paths
+**/pgdata/
+**/mysql_data/
+**/mariadb_data/
+**/*-db-data/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

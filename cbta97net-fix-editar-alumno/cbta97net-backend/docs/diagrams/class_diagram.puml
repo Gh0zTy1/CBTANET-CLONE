@@ -1,0 +1,193 @@
+@startuml class_diagram
+
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam monochrome true
+
+' Vertical layout hints
+top to bottom direction
+
+' --- CLUSTER: IDENTIDAD Y PERSONAL ---
+together {
+    class Usuario {
+        - id: Long
+        - curp: String
+        - nombre: String
+        - apellidoPaterno: String
+        - apellidoMaterno: String
+        - email: String
+        - telefono: String
+        - activo: boolean
+    }
+
+    class Docente {
+        - id: Long
+        - cedulaProfesional: String
+        - usuarioId: Long
+        - materiasCalificadasIds: Set<Long>
+    }
+}
+
+' --- CLUSTER: ALUMNADO ---
+together {
+    class Alumno {
+        - id: Long
+        - matricula: String
+        - curp: String
+        - nombre: String
+        - apellidoPaterno: String
+        - apellidoMaterno: String
+        - fechaNacimiento: LocalDate
+        - numeroSeguroSocial: String
+        - tutorAcademicoId: Long
+    }
+
+    class Tutor {
+        - id: Long
+        - nombre: String
+        - telefono: String
+    }
+
+    class AlumnoInscrito {
+        - id: Long
+        - alumnoId: Long
+        - fechaInscripcion: LocalDate
+        - fechaBaja: LocalDate
+    }
+}
+
+' --- CLUSTER: ESTRUCTURA Y GRUPOS ---
+together {
+    class CicloEscolar {
+        - id: Long
+        - nombre: String
+        - fechaInicio: LocalDate
+        - fechaFin: LocalDate
+    }
+
+    class CarreraTecnica {
+        - id: Long
+        - nombre: String
+    }
+
+    class AreaPropedeutica {
+        - id: Long
+        - nombre: String
+    }
+
+    class Grupo {
+        - id: Long
+        - letra: Character
+        - semestre: int
+        - cicloEscolarId: Long
+        - carreraTecnicaId: Long
+        - areaPropedeuticaId: Long
+    }
+}
+
+' --- CLUSTER: ACADÉMICA Y HORARIOS ---
+together {
+    class Materia {
+        - id: Long
+        - clave: String
+        - nombre: String
+    }
+
+    class Unidad {
+        - id: Long
+        - nombre: String
+    }
+
+    class Aula {
+        - id: Long
+        - nombre: String
+    }
+
+    class Clase {
+        - id: Long
+        - materiaId: Long
+        - docenteId: Long
+        - aulaId: Long
+        - grupoId: Long
+    }
+
+    class Calificacion {
+        - id: Long
+        - alumnoInscritoId: Long
+        - unidadId: Long
+        - puntaje: Double
+    }
+
+    class Asistencia {
+        - id: Long
+        - alumnoInscritoId: Long
+        - claseId: Long
+        - fecha: LocalDate
+        - estado: EstadoAsistencia
+    }
+}
+
+' --- CLUSTER: PARAESCOLAR ---
+together {
+    class ActividadParaescolar {
+        - id: Long
+        - nombre: String
+    }
+
+    class GrupoParaescolar {
+        - id: Long
+        - nombre: String
+        - actividadId: Long
+        - responsableId: Long
+    }
+
+    class AlumnoInscritoParaescolar {
+        - id: Long
+        - alumnoId: Long
+        - grupoParaescolarId: Long
+    }
+
+    class ClaseParaescolar {
+        - id: Long
+        - actividadId: Long
+        - docenteId: Long
+        - aulaId: Long
+    }
+}
+
+' --- RELACIONES ---
+
+' Identidad
+Usuario "1" -- "0..1" Docente : se identifica como >
+
+' Alumnado
+Alumno "0..*" o-- "1" Tutor : tiene >
+Alumno "1" -- "0..*" AlumnoInscrito : se inscribe >
+CicloEscolar "1" -- "0..*" AlumnoInscrito : contiene >
+Grupo "1" -- "0..*" AlumnoInscrito : agrupa >
+
+' Estructura
+CarreraTecnica "1" -- "0..*" Grupo : categoriza >
+AreaPropedeutica "1" -- "0..*" Grupo : especializa >
+Docente "1" -- "0..*" Grupo : es tutor de >
+
+' Horarios y Académica
+Materia "1" -- "0..*" Clase : se imparte en >
+Docente "1" -- "0..*" Clase : imparte >
+Aula "1" -- "0..*" Clase : aloja >
+Grupo "1" -- "0..*" Clase : programa >
+
+AlumnoInscrito "1" *-- "0..*" Calificacion : recibe <
+Unidad "1" -- "0..*" Calificacion : evalúa <
+
+AlumnoInscrito "1" *-- "0..*" Asistencia : registra >
+Clase "1" -- "0..*" Asistencia : rastrea >
+
+' Paraescolar
+ActividadParaescolar "1" -- "0..*" GrupoParaescolar : define >
+Docente "1" -- "1" GrupoParaescolar : gestiona >
+Alumno "1" -- "0..*" AlumnoInscritoParaescolar : participa en >
+GrupoParaescolar "1" -- "0..*" AlumnoInscritoParaescolar : aloja >
+
+@enduml

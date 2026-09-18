@@ -1,0 +1,24 @@
+<z-divider zSpacing="lg" />
+
+<div class="mb-(--space-5)">
+    <h2 class="text-(length:--text-lead) text-gray-600 mb-(--space-1) font-semibold">Documentos Requeridos</h2>
+    <p class="text-gray-400 text-(length:--text-md) font-regular">Adjunte los documentos escaneados del alumno (PDF).</p>
+</div>
+
+<div class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-(--space-4) mb-(--space-8)">
+    <input-upload-secondary  
+        label="Acta de Nacimiento"
+        #actaNacimiento
+        [validExtensions]="['pdf']"
+    />
+    <input-upload-secondary 
+        #certificadoSecundaria
+        label="Certificado de Secundaria"
+        [validExtensions]="['pdf']"
+    />
+    <input-upload-secondary 
+        #documentoCurp
+        label="Documento CURP"
+        [validExtensions]="['pdf']"
+    />
+</div>

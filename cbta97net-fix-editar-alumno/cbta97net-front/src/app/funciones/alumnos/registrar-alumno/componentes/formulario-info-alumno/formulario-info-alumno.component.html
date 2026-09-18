@@ -1,0 +1,151 @@
+<h2 class="text-(length:--text-lead) text-gray-600 mb-(--space-3) font-semibold">Datos del Alumno</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-(--space-4)">
+  <input-number-outline 
+    #matricula 
+    placeHolder="Matrícula"
+    min="0"
+    max="14" 
+    [allowDecimals]="false"
+    [allownNegatives]="false"
+  />
+  <input-text-outline 
+    #curp 
+    placeHolder="CURP"
+    min="0" 
+    max="18" 
+    [allowSpaces]="false"
+  />
+  <input-text-outline 
+    #nombres 
+    placeHolder="Nombre(s)" 
+    min="0" 
+    max="40" 
+  />
+  <input-text-outline 
+    #apellidoPaterno 
+    placeHolder="Apellido Paterno" 
+    min="0" 
+    max="30" 
+    [allowSpaces]="false"
+  />
+  <input-text-outline 
+    #apellidoMaterno 
+    placeHolder="Apellido Materno"
+    min="0" 
+    max="30" 
+    [allowSpaces]="false"
+  />
+  <input-date-outline 
+    #fechaNacimiento 
+    placeHolder="Fecha de Nacimiento" 
+  />
+  <input-number-outline 
+    #nss 
+    placeHolder="Número de Seguro Social (NSS)" 
+    min="0" 
+    max="11" 
+    [allowDecimals]="false"
+    [allownNegatives]="false"
+  />
+  <input-insurance-outline 
+    #polizaSeguro 
+    placeHolder="Póliza Seguro Escuela" 
+    min="0" 
+    max="12" 
+  />
+</div>
+
+<z-divider zSpacing="lg" /> 
+
+<h2 class="text-(length:--text-lead) text-gray-600 mb-(--space-3) font-semibold">Dirección del Alumno</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-(--space-4)">
+  <input-text-outline 
+    #calle 
+    placeHolder="Calle"
+    max="30"
+  />
+  <input-text-outline 
+    #colonia 
+    placeHolder="Colonia" 
+    max="30"
+  />
+  <input-number-outline  
+    #numeroExterior  
+    placeHolder="Número Exterior" 
+    max="14"
+  />
+  <input-number-outline  
+    #codigoPostal 
+    placeHolder="Código Postal" 
+    max="14"
+  />
+  <input-text-outline
+    #localidad 
+    placeHolder="Localidad" 
+    max="30"
+  />
+</div>
+
+<z-divider zSpacing="lg" /> 
+
+<h2 class="text-(length:--text-lead) text-gray-600 mb-(--space-3) font-semibold">Datos del Tutor Legal</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-(--space-4)">
+  <app-combobox
+    #parentesco 
+    placeholder="Parentesco"
+    searchPlaceholder="Buscar parentesco"
+    [options]="parentescos"
+    [buttonSize]="'sm'"
+    [buttonVariant]="'outline'"
+    [buttonSize]="'lg'"
+    [ariaLabel]="'Selecciona un parentesco'"
+  />
+  <input-text-outline 
+    #nombresTutor 
+    placeHolder="Nombre(s) del Tutor" 
+    max="40"
+  />
+  <input-text-outline 
+    #apellidoPaternoTutor 
+    placeHolder="Apellido Paterno" 
+    max="30" 
+    [allowSpaces]="false"
+  />
+  <input-text-outline 
+    #apellidoMaternoTutor 
+    placeHolder="Apellido Materno" 
+    max="30" 
+    [allowSpaces]="false"
+  />
+  <input-cellphone-outline 
+    #telefonoTutor  
+    placeHolder="Teléfono" 
+    max="14"
+    [cellphoneNumberLength]="10" 
+  />
+  <input-date-outline
+    #fechaNacimientoTutor 
+    placeHolder="Fecha de Nacimiento" 
+  />
+</div>
+
+<z-divider zSpacing="lg" /> 
+
+<h2 class="text-(length:--text-lead) text-gray-600 mb-(--space-3) font-semibold">Área Educativa</h2>
+<div class="flex flex-col gap-(--space-3)">
+  <div>
+    <app-checkbox
+      #especialConditionCheckbox
+      size="md"
+      placeHolder="¿Tiene una condición especial?"
+      (change)="alMarcarCheckboxCondicionEspecial($event)"
+    />
+  </div>
+  <div [ngStyle]="{ display: showingConditionTextArea() ? 'block' : 'none' }">
+    <text-area
+      #condicionEspecial 
+      [max]="600"
+      placeHolder="Describa la condición o anotaciones relevantes..."
+    />
+  </div>
+</div>

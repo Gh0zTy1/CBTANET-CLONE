@@ -1,0 +1,67 @@
+@startuml registro_paraescolar_sequence
+
+skinparam style strictuml
+skinparam sequenceMessageAlign center
+skinparam monochrome true
+
+actor "Usuario (Administrativo)" as User
+participant "GrupoParaescolarController" as Controller <<Controller>>
+participant "GrupoParaescolarMapper" as Mapper <<DTO Mapper>>
+participant "GrupoParaescolarServiceImpl" as Service <<Service>>
+participant "CicloEscolarService" as CicloService <<Service>>
+participant "ActividadParaescolarService" as ParaescolarService <<Service>>
+participant "GrupoParaescolarRepository" as Repo <<Repository>>
+participant "ClaseParaescolarService" as ClaseService <<Service>>
+
+User -> Controller : POST /paraescolares/grupos (CrearGrupoParaescolarDTO)
+activate Controller
+
+Controller -> Mapper : toDTO(crearGrupoParaescolarDTO)
+activate Mapper
+Mapper --> Controller : grupoParaescolarDTO
+deactivate Mapper
+
+Controller -> Service : crearGrupo(grupoParaescolarDTO)
+activate Service
+
+Service -> CicloService : obtenerCicloEscolarActivo()
+activate CicloService
+CicloService --> Service : cicloActivo
+deactivate CicloService
+
+Service -> ParaescolarService : obtenerParaescolarPorId(actividadId)
+activate ParaescolarService
+ParaescolarService --> Service : paraescolarDTO
+deactivate ParaescolarService
+
+Service -> Mapper : toEntity(grupoParaescolarDTO)
+activate Mapper
+Mapper --> Service : grupoRegistrar
+deactivate Mapper
+
+Service -> Repo : save(grupoRegistrar)
+activate Repo
+Repo --> Service : registrado (con ID)
+deactivate Repo
+
+loop por cada Clase en clases
+    Service -> Service : set IDs (Grupo, Actividad, Ciclo, Docente)
+end
+
+Service -> ClaseService : registrarClases(registrado.id, clases)
+activate ClaseService
+ClaseService --> Service : void
+deactivate ClaseService
+
+Service -> Mapper : toDTO(registrado)
+activate Mapper
+Mapper --> Service : respuestaDTO
+deactivate Mapper
+
+Service --> Controller : respuestaDTO
+deactivate Service
+
+Controller --> User : 200 OK ("Grupo paraescolar creado con éxito.")
+deactivate Controller
+
+@enduml

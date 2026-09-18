@@ -1,0 +1,42 @@
+<div class="flex flex-col gap-2">
+  <div class="relative">
+    <input
+      #dateInput
+      type="text"
+      [name]="name()"
+      [autocomplete]="autocomplete()"
+      [attr.minlength]="_min()"
+      [attr.maxlength]="_max()"
+      [value]="_value()"
+      [disabled]="_isDisabled()"
+      (input)="onInput($event)"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+      class="w-full h-11 px-4 rounded-md border bg-transparent font-normal text-(length:--text-sm) text-slate-600
+            placeholder:text-transparent outline-none
+            transition-all disabled:cursor-not-allowed disabled:opacity-50"
+      [ngClass]="{
+        'border-border focus:border-gray-700': !_isError(),
+        'border-destructive focus:border-destructive': _isError()
+      }"
+    />
+    <label 
+      class="absolute left-3 px-1 bg-white transition-all duration-150 pointer-events-none"
+      [class]="labelClasses()"
+    >
+      {{ placeHolder() }}
+    </label>
+    <div class="absolute right-1 top-1 z-40" zTooltip="SeleccionarFecha">
+      <z-date-picker-icon
+        zType="ghost"
+        placeholder="Fecha de nacimiento"
+        [minDate]="minDate()"
+        [maxDate]="maxDate()"
+        (dateChange)="onDateSelected($event)"
+      />
+    </div>
+  </div>
+  <small class="text-destructive" [class.hidden]="!_isError()">
+    {{ _errorMessage() }}
+  </small>
+</div>

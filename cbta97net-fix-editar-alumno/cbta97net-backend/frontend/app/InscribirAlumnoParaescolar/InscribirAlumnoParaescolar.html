@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscribir Alumno - CBTANet</title>
+    <link rel="stylesheet" href="InscribirAlumnoParaescolar.css">
+</head>
+<body>
+<div class="container">
+    <header class="module-header">
+        <h1>Inscribir Alumno a Paraescolar</h1>
+        <p>Busca al alumno y selecciona un grupo disponible.</p>
+    </header>
+
+    <section class="search-section card">
+        <div class="form-group">
+            <label for="txtMatricula">Matrícula del Alumno:</label>
+            <div class="input-group">
+                <input type="text" id="txtMatricula" placeholder="Ej: A00123456" maxlength="20">
+                <button id="btnBuscar" class="btn btn-primary">Buscar Alumno</button>
+            </div>
+        </div>
+
+        <div id="infoAlumnoContainer" class="student-info hidden">
+            <h3>Datos del Alumno</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="label">Nombre:</span>
+                    <span class="value" id="lblNombreCompleto">--</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Carrera:</span>
+                    <span class="value" id="lblCarrera">--</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Semestre:</span>
+                    <span class="value" id="lblSemestre">--</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Estatus:</span>
+                    <span class="value status-active">Activo</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gruposSection" class="groups-section card hidden">
+        <div class="section-header">
+            <h2>Grupos Disponibles (Ciclo Activo)</h2>
+            <button id="btnRecargarGrupos" class="btn btn-secondary btn-sm">Actualizar Lista</button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table" id="tablaGrupos">
+                <thead>
+                <tr>
+                    <th>Actividad</th>
+                    <th>Docente</th>
+                    <th>Horario</th>
+                    <th class="text-center">Cupo</th>
+                    <th class="text-center">Acción</th>
+                </tr>
+                </thead>
+                <tbody id="tbodyGrupos">
+                </tbody>
+            </table>
+        </div>
+        <div id="loadingGrupos" class="loading-spinner hidden">Cargando grupos...</div>
+        <div id="mensajeSinGrupos" class="alert alert-info hidden">No hay grupos activos disponibles en este momento.</div>
+    </section>
+</div>
+
+<script src="InscribirAlumnoParaescolar.js"></script>
+</body>
+</html>

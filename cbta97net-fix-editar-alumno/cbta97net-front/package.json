@@ -1,0 +1,58 @@
+{
+  "name": "cbta97net-front",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "packageManager": "npm@11.7.0",
+  "dependencies": {
+    "@angular/cdk": "^21.2.2",
+    "@angular/common": "^21.0.8",
+    "@angular/compiler": "^21.0.8",
+    "@angular/core": "^21.0.8",
+    "@angular/forms": "^21.0.8",
+    "@angular/platform-browser": "^21.0.8",
+    "@angular/router": "^21.0.8",
+    "@ng-icons/core": "^33.2.0",
+    "@ng-icons/feather-icons": "^33.2.0",
+    "@ng-icons/heroicons": "^33.2.0",
+    "@ng-icons/lucide": "^33.2.1",
+    "@tailwindcss/postcss": "^4.2.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-angular": "^0.577.0",
+    "ngx-sonner": "^3.1.0",
+    "rxjs": "~7.8.0",
+    "tailwind-animate": "^0.2.10",
+    "tailwind-merge": "^3.5.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^21.0.3",
+    "@angular/cli": "^21.0.3",
+    "@angular/compiler-cli": "^21.0.8",
+    "@tailwindcss/cli": "^4.2.1",
+    "jsdom": "^27.1.0",
+    "tailwindcss": "^4.2.1",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "~5.9.2",
+    "vitest": "^4.0.8"
+  }
+}

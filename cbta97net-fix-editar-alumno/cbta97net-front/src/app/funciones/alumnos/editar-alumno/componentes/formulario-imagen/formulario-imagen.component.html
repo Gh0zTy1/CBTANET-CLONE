@@ -1,0 +1,71 @@
+<style>
+  .icon-size {
+    font-size: var(--icon-sm);
+  }
+</style>
+
+<div
+  class="flex flex-col items-center gap-2 mb-(--space-6) p-(--space-4) border-3 border-dashed rounded-lg transition-all duration-300"
+  [ngClass]="{
+    'border-blue-500 bg-blue-50 scale-105': _estaArrastrando(),
+    'border-gray-300 bg-gray-50': !_estaArrastrando()
+  }"
+  (dragover)="alArrastrarSobre($event)"
+  (dragleave)="alSalirArrastrar($event)"
+  (drop)="alSoltar($event)"
+>
+  <h2 class="text-(length:--text-lead) text-gray-600 mb-(--space-2) font-semibold">Foto del Alumno</h2>
+  <img
+    class="w-44 h-44 rounded-full border-4 border-gray-200 object-cover bg-white mt-2"
+    [src]="_imagenCargada() || 'placeholder-user.webp'"
+    alt="Vista previa de la foto"
+    draggable="false"
+  />
+  <div class="w-full my-4 flex flex-wrap flex-row justify-center items-center gap-(--space-4)">
+    <!-- contendor del selector de archivos-->
+    <div class="flex justify-center items-center" >
+      <div class="relative inline-block">
+        <label
+          class="h-9 px-2 flex items-center gap-(--space-1) text-(length:--text-sm) rounded-md border-gray-600 bg-gray-600 hover:bg-gray-700 text-white font-normal transition-colors duration-300 cursor-pointer select-none"
+          for="entrada-imagen"
+        >
+          <span class="material-icons icon-size">attach_file</span>
+          seleccionar
+        </label>
+        <input #entradaImagen id="entrada-imagen" type="file" class="absolute opacity-0 w-0 h-0 overflow-hidden" (change)="alSubir($event)" /> 
+      </div>
+      <div class="min-w-32">
+        <p class="min-w-0 h-11 px-2 flex items-center text-(length:--text-sm) truncate">{{ _nombreArchivo() }}</p>
+      </div>
+    </div>
+    <!-- fin del contenedor -->
+    <div class="flex flex-row gap-(--space-2)">
+      @if(showUpload()){
+        <div class="w-14" zTooltip="Guardar imagen">
+          <app-button
+            #botonGuardarArchivo
+            size="default"
+            icon="cloud_upload"
+            iconSize="md"
+            type="default"
+            shape="default"
+            (click)="alActualizarArchivo($event)"
+          />
+        </div>
+      }
+      @if(_archivoExiste()){
+        <div class="w-10" zTooltip="Descargar imagen">
+          <app-button
+            #botonDescargarArchivo
+            size="default"
+            icon="download"
+            iconSize="md"
+            type="secondary"
+            shape="circle"
+            (click)="manejarDescargaImagen($event)"
+          />
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<style>
+    .user-table-icon {
+        font-size: var(--icon-md);
+    }
+</style>
+
+<div class="h-102">
+    <table z-table z-type="fixed" zSize="compact">
+        <thead z-table-header>
+            <tr z-table-row>
+                <th class="w-[5%]" z-table-head>ID</th>
+                <th class="w-[25%]" z-table-head>CURP</th>
+                <th class="w-[60%]" z-table-head>Nombre</th>
+                <th class="w-[10%] text-center!" z-table-head>Acciones</th>
+            </tr>
+        </thead>
+        <tbody z-table-body>
+            @if (_estaCargando()) {
+                @for (row of skeletonRows; track $index) {
+                    <tr z-table-row>
+                        <td z-table-cell>
+                            <z-skeleton class="h-9" />
+                        </td>
+                        <td z-table-cell>
+                            <z-skeleton class="h-9" />
+                        </td>
+                        <td z-table-cell>
+                            <z-skeleton class="h-9" />
+                        </td>
+                        <td z-table-cell class="flex items-center justify-center gap-4">
+                            <z-skeleton class="w-9 h-9 rounded-full" />
+                            <z-skeleton class="w-9 h-9 rounded-full" />
+                        </td>
+                    </tr>
+                }
+            } @else {
+                @for(user of usuarios(); track user.id) {
+                    <tr z-table-row>
+                        <td z-table-cell>{{ user.id }}</td>
+                        <td z-table-cell>{{ user.curp }}</td>
+                        <td z-table-cell>
+                            {{ user.nombre }} {{ user.apellido_paterno }} {{ user.apellido_materno }}
+                        </td>
+                        <td z-table-cell class="flex flex-row justify-center gap-3">
+                            <button 
+                                type="button"
+                                (click)="irEditarUsuario(user)"
+                                [disabled]="_bloquearBotones()"
+                                class="flex items-center justify-center rounded-full hover:bg-gray-300 select-none"> 
+                                <span class="material-icons user-table-icon text-muted-foreground p-1.5">edit</span>
+                            </button>
+                            @if (!esUsuarioActual(user.id)) {
+                                <button 
+                                    type="button"
+                                    [disabled]="_bloquearBotones()"
+                                    (click)="abrirConfirmacionEliminacion(user)"
+                                    class="flex items-center justify-center rounded-full hover:bg-gray-300 select-none">
+                                    <span class="material-icons user-table-icon text-muted-foreground p-1.5 hover:text-destructive/80">delete</span>
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                } 
+                @empty {
+                    <tr z-table-row>
+                        <td z-table-cell [attr.colspan]="4" class="h-90 text-center text-slate-600">
+                            Sin resultados.
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

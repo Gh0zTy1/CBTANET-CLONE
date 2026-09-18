@@ -1,0 +1,27 @@
+<div class="flex flex-col gap-2">
+  <label class="text-sm leading-none font-medium">
+    {{ label() }}
+  </label>
+  <z-input-group [zAddonBefore]="iconTemplate">
+    <input
+      z-input
+      zSize="lg"
+      [zStatus]="_isError() ? 'error' : undefined"
+      type="text"
+      [name]="name()"
+      [autocomplete]="autocomplete()"
+      [value]="_value()"
+      [attr.minlength]="minLength()"
+      [attr.maxlength]="maxLength()"
+      [placeholder]="placeHolder()"
+      (input)="onInput($event)"
+      class="truncate"
+    />
+  </z-input-group>
+  <ng-template #iconTemplate>
+    <span class="material-icons text-gray-500">{{ icon() }}</span>
+  </ng-template>
+  <small class="text-destructive" [class.hidden]="!_isError()">
+    {{ _errorMessage() }}
+  </small>
+</div>

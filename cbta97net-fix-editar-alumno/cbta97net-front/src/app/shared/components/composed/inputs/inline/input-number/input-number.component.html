@@ -1,0 +1,21 @@
+<div class="flex flex-col gap-2">
+  <label class="text-sm leading-none font-medium">
+    {{ label() }}
+  </label>
+  <input
+    z-input
+    zSize="lg"
+    [zStatus]="_isError() ? 'error' : undefined"
+    type="number"
+    [name]="name()"
+    [autocomplete]="autocomplete()"
+    [value]="_value()"
+    [attr.minlength]="minLength()"
+    [attr.maxlength]="maxLength()"
+    [placeholder]="placeHolder()"
+    (input)="onInput($event)"
+  />
+  <small class="text-destructive" [class.hidden]="!_isError()">
+    {{ _errorMessage() }}
+  </small>
+</div>

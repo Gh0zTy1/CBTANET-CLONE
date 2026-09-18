@@ -1,0 +1,543 @@
+* {
+    box-sizing: border-box;
+}
+
+.schedule-table tbody td {
+    position: static; 
+    overflow: hidden;
+}
+
+.schedule-table .class-scheduled {
+ 
+}
+
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    height: 150px;
+    width: auto;
+    margin-bottom: 20px;
+}
+
+.header-text {
+    flex: 1;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 2rem;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1750px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #131313;
+    margin-bottom: 0.5rem;
+}
+
+header .subtitle {
+    margin: 0;
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+.group-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #000000;
+}
+
+.form-field input,
+.form-field select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+    outline: none;
+    border-color: #2d6a4f;
+    background-color: #fff;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #e9ecef;
+    margin: 2rem 0;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.materials-section {
+    margin-bottom: 1rem;
+}
+
+.materials-section h2 {
+    margin-bottom: 1rem;
+    color: #1e5631;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.add-materia-container {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+}
+
+.add-materia-container select {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    font-size: 1rem;
+}
+
+.materials-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.materials-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.materials-list li:hover {
+    background-color: #e9ecef;
+}
+
+.material-text {
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 0.5rem;
+}
+
+.material-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.material-actions .material-icons {
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 6px;
+    font-size: 20px;
+    transition: all 0.2s;
+}
+
+.material-actions .material-icons:hover {
+    background-color: rgba(0,0,0,0.1);
+    transform: scale(1.1);
+}
+
+.material-actions .add-btn {
+    color: #4CAF50;
+}
+
+.material-actions .edit-btn {
+    color: #2196F3;
+}
+
+.material-actions .delete-btn {
+    color: #f44336;
+}
+
+#assigned-materials-list li.materia-asignada {
+    background-color: #e8f5e8;
+    border-color: #4CAF50;
+}
+
+#assigned-materials-list li.materia-asignada .material-text {
+    color: #2e7d32;
+    font-weight: 500;
+}
+
+.schedule-section {
+    margin-top: 1rem;
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin-top: 1rem;
+}
+
+.schedule-table th,
+.schedule-table td {
+    border: 1px solid #dee2e6;
+    padding: 0.5rem;
+    text-align: center;
+    height: 60px;
+    vertical-align: top;
+}
+
+.schedule-table thead th {
+    background-color: #2d6a4f;
+    font-weight: 600;
+    color: white;
+}
+
+.schedule-table tbody th {
+    font-weight: 600;
+    background-color: #40916c;
+    width: 80px;
+    color: white;
+}
+
+.schedule-table tbody td {
+    cursor: pointer;
+    transition: background-color 0.2s;
+    position: relative;
+}
+
+.schedule-table tbody td:hover {
+    background-color: #e9ecef;
+}
+
+.schedule-table .class-scheduled {
+    background-color: #40916c;
+    color: white;
+    font-size: 0.7rem;
+    padding: 4px;
+    text-align: left;
+    border-radius: 4px;
+    cursor: default;
+     line-height: 1.2;
+     height: 100%; 
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: flex-start; */
+
+
+
+   position: static; 
+     height: auto; 
+     min-height: 100%; 
+     z-index: 1; 
+
+}
+
+.schedule-table .class-scheduled strong {
+    display: block;
+    font-size: 0.75rem;
+    margin-bottom: 2px;
+    font-weight: 600;
+}
+
+.schedule-table .class-scheduled:hover {
+    background-color: #2d6a4f;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background-color: #2d6a4f;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.materias-container {
+    margin-bottom: 20px;
+}
+
+.materias-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.materia-item {
+    padding: 12px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.materia-item:hover {
+    background: #e9ecef;
+    border-color: #2d6a4f;
+}
+
+.materia-item:active {
+    background: #2d6a4f;
+    color: white;
+}
+
+.main-container {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.materias-column {
+    flex: 0 0 350px; 
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.horario-column {
+    flex: 1; 
+    min-width: 0;
+}
+
+.materias-container {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    max-height: 400px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.materias-container h3 {
+    margin: 0 0 15px 0;
+    color: #1e5631;
+    font-size: 16px;
+}
+
+.materias-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.materia-item {
+    padding: 12px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.materia-item:hover {
+    background: #e9ecef;
+    border-color: #2d6a4f;
+    transform: translateY(-1px);
+}
+
+.materia-item:active {
+    background: #2d6a4f;
+    color: white;
+}
+
+.assigned-materias {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.assigned-materias h3 {
+    margin: 0 0 15px 0;
+    color: #1e5631;
+    font-size: 16px;
+}
+
+.schedule-container {
+    overflow-x: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.schedule-table {
+    width: 100%;
+    min-width: 600px; 
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .container {
+        padding: 1.5rem;
+    }
+    
+    .group-details {
+        grid-template-columns: 1fr;
+    }
+    
+    .add-materia-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .schedule-table {
+        font-size: 0.8rem;
+    }
+    
+    .schedule-table th,
+    .schedule-table td {
+        padding: 0.25rem;
+        height: 50px;
+    }
+    
+    .main-container {
+        flex-direction: column;
+    }
+    
+    .materias-column {
+        flex: none;
+        width: 100%;
+    }
+}
+
+
+
+.custom-modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+  z-index: 99999;
+}
+
+.custom-modal-box {
+  width: 360px;
+  max-width: calc(100% - 40px);
+  background: #fff;
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.custom-modal-box p { margin: 0 0 14px 0; color: #222; }
+
+.custom-modal-actions { display: flex; gap: 10px; justify-content: center; }
+
+.custom-modal-box button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.custom-modal-box.confirm .custom-modal-yes {
+  background: #0078d4; color: #fff;
+}
+
+.custom-modal-box.confirm .custom-modal-no {
+  background: #9aa0a6; color: #fff;
+}
+
+.custom-modal-box .custom-modal-ok {
+  background: #0078d4; color: white;
+}

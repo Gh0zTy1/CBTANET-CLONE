@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso CBTA97Net | CBTA 97</title>
+    <link rel="stylesheet" href="login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-background">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="../resources/cbtalogo.jpeg" alt="Escudo CBTA 97" class="logo">
+                <h1>CBTA97Net</h1>
+                <p>Sistema de Control Escolar</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="userId">Matrícula / ID de Usuario</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="userId" name="id" placeholder="Ej. 19040042" required autofocus>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" name="contrasena" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <div id="feedbackMessage" class="feedback-msg" style="display: none;"></div>
+
+                <button type="submit" class="btn-primary">
+                    INGRESAR
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p>Centro de Bachillerato Tecnológico Agropecuario No. 97</p>
+                <p class="location">Basconcobe, Sonora</p>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<style>
+  #sidebar-user-icon {
+    font-size: var(--icon-lg);
+    margin-top: 0.1rem;
+  }
+
+  .button-outline-icon {
+      font-size: var(--icon-sm);
+  }
+</style>
+
+<div class="p-(--space-3) border-t border-white/40 flex flex-col gap-(--space-2)">
+  <!-- User info card -->
+  <div
+    class="h-full w-full bg-transparent border border-white/40 text-white p-(--space-3) rounded-md flex flex-row gap-(--space-2)"
+  >
+    <!-- User icon -->
+    <span id="sidebar-user-icon" class="material-icons select-none">account_circle</span>
+    <!-- Right card section -->
+    <div class="flex flex-col gap-(--space-2) w-full">
+      <span class="text-(length:--text-md) "><b>ID:</b> {{ userId() }}</span>
+      @for(role of roles(); track $index) {
+        <small class="w-fit bg-white/20 text-white px-2.5 py-1 rounded-full font-semibold">
+          {{ role }}
+        </small>
+      }
+    </div>
+  </div>
+
+  <!-- Log out button -->
+  <button 
+    (click)="handleLogOut($event)"
+    class="w-full flex items-center justify-center h-11 text-(length:--text-sm) bg-transparent border border-white/40 text-white 
+              rounded-md gap-(--space-2) cursor-pointer
+              transition-all duration-200 hover:bg-white/20 hover:border-white"
+    >
+      <span class="material-icons button-outline-icon">logout</span> 
+      Cerrar Sesión
+  </button>
+
+</div>
+

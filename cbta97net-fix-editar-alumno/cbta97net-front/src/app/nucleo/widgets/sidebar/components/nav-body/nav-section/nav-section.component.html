@@ -1,0 +1,24 @@
+<style>
+  #sidebarSectionIcon {
+    font-size: var(--icon-md);
+  }
+</style>
+
+
+<a
+  class="flex items-center p-(--space-3) text-(length:--text-md) text-white/90 no-underline transition-all duration-300 border-l-3 border-transparent hover:bg-white/15 hover:border-white hover:text-white select-none cursor-pointer"
+  (click)="toggle($event)"
+>
+  <span id="sidebarSectionIcon" class="material-icons mr-(--space-2) select-none">{{ icon }}</span>
+  {{ label }}
+  <span id="sidebarSectionIcon" class="material-icons ml-auto transition-transform duration-300" [class.rotate-180]="open">
+    expand_more
+  </span>
+</a>
+
+@if (open) {
+  <ul class="list-none animate-[slideDown_0.3s_ease-in-out]">
+    <ng-content></ng-content>
+  </ul>
+}
+

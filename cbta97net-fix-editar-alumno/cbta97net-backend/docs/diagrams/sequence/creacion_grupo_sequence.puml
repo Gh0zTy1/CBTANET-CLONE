@@ -1,0 +1,72 @@
+@startuml creacion_grupo_sequence
+
+skinparam style strictuml
+skinparam sequenceMessageAlign center
+skinparam monochrome true
+
+actor "Usuario (Administrativo)" as User
+participant "GrupoController" as Controller <<Controller>>
+participant "GrupoMapper" as Mapper <<DTO Mapper>>
+participant "GrupoServiceImpl" as Service <<Service>>
+participant "CicloEscolarService" as CicloService <<Service>>
+participant "GrupoRepository" as Repo <<Repository>>
+participant "MateriaService" as MateriaService <<Service>>
+participant "ClaseService" as ClaseService <<Service>>
+
+User -> Controller : POST /grupos (CrearNuevoGrupoDTO)
+activate Controller
+
+Controller -> Mapper : toDTO(nuevoGrupoDTO)
+activate Mapper
+Mapper --> Controller : grupoDTO
+deactivate Mapper
+
+Controller -> Service : registrarGrupo(grupoDTO)
+activate Service
+
+Service -> CicloService : obtenerCicloEscolarActivo()
+activate CicloService
+CicloService --> Service : cicloActivo
+deactivate CicloService
+
+Service -> Repo : existsBySemestreAndLetraAndCicloEscolarId(...)
+activate Repo
+Repo --> Service : false
+deactivate Repo
+
+Service -> Mapper : toEntity(grupoDTO)
+activate Mapper
+Mapper --> Service : grupoRegistrar
+deactivate Mapper
+
+Service -> Repo : save(grupoRegistrar)
+activate Repo
+Repo --> Service : registrado (con ID)
+deactivate Repo
+
+loop por cada Clase en clases
+    Service -> MateriaService : obtenerMateriaPorId(materiaId)
+    activate MateriaService
+    MateriaService --> Service : materiaDTO
+    deactivate MateriaService
+    
+    Service -> Service : validarHorasTotalesPorMateria()
+end
+
+Service -> ClaseService : registrarClases(registrado.id, clases)
+activate ClaseService
+ClaseService --> Service : void
+deactivate ClaseService
+
+Service -> Mapper : toDTO(registrado)
+activate Mapper
+Mapper --> Service : respuestaDTO
+deactivate Mapper
+
+Service --> Controller : respuestaDTO
+deactivate Service
+
+Controller --> User : 201 Created ("El grupo se creó correctamente.")
+deactivate Controller
+
+@enduml

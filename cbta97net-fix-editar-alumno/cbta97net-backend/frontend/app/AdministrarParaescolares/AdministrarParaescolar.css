@@ -1,0 +1,177 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f1f1f1;
+    padding: 10px 20px;
+    color: white;
+}
+
+.logo-text {
+    display: flex;
+    align-items: center;
+}
+
+.logo-text img {
+    height: 60px;
+    margin-right: 15px;
+}
+
+.header-text h1 {
+    margin: 0;
+    font-size: 1.5em;
+     color: #000000;
+}
+
+.header-text span {
+    font-size: 0.9em;
+    color: #000000;
+}
+
+.btn {
+    cursor: pointer;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.btn-primary {
+    background-color: #0a921a;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.toolbar {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-input {
+    padding: 6px 10px 6px 30px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.search-icon {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+.card {
+    margin: 20px;
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    vertical-align: top;
+}
+
+th {
+    text-align: left;
+    background: #f0f0f0;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 1em;
+}
+
+.icon-btn.delete {
+    color: #dc3545;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-body .form-group {
+    margin-bottom: 15px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}

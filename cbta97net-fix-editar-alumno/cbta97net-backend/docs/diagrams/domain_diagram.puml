@@ -1,0 +1,172 @@
+@startuml domain_diagram
+
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam monochrome true
+
+package "Dominio de Usuarios" {
+    class Usuario {
+        id
+        curp
+        nombre
+        apellidoPaterno
+        apellidoMaterno
+        email
+        telefono
+        activo
+    }
+}
+
+package "Dominio de Personal" {
+    class Docente {
+        id
+        cedulaProfesional
+        usuarioId
+    }
+}
+
+package "Dominio de Alumnado" {
+    class Alumno {
+        id
+        matricula
+        curp
+        nombre
+        apellidoPaterno
+        apellidoMaterno
+        fechaNacimiento
+        numeroSeguroSocial
+    }
+
+    class Tutor {
+        id
+        nombre
+        telefono
+    }
+}
+
+package "Dominio de Estructura" {
+    class Unidad {
+        id
+        nombre
+    }
+
+    class Materia {
+        id
+        clave
+        nombre
+    }
+
+    class CicloEscolar {
+        id
+        nombre
+        fechaInicio
+        fechaFin
+    }
+
+    class CarreraTecnica {
+        id
+        nombre
+    }
+
+    class Aula {
+        id
+        nombre
+    }
+
+    class AreaPropedeutica {
+        id
+        nombre
+    }
+
+    class AlumnoInscrito {
+        id
+        alumnoId
+        fechaInscripcion
+        fechaBaja
+    }
+}
+
+package "Dominio de Grupos" {
+    class Grupo {
+        id
+        letra
+        semestre
+        cicloEscolarId
+    }
+}
+
+package "Dominio de Horarios" {
+    class Clase {
+        id
+        materiaId
+        docenteId
+        aulaId
+        grupoId
+    }
+}
+
+package "Dominio de Paraescolares" {
+    class ActividadParaescolar {
+        id
+        nombre
+    }
+
+    class GrupoParaescolar {
+        id
+        nombre
+        actividadId
+    }
+
+    class AlumnoInscritoParaescolar {
+        id
+        alumnoId
+        grupoParaescolarId
+    }
+}
+
+package "Dominio Académico" {
+    class Calificacion {
+        id
+        alumnoInscritoId
+        unidadId
+        puntaje
+    }
+
+    class Asistencia {
+        id
+        alumnoInscritoId
+        claseId
+        fecha
+    }
+}
+
+' Relaciones de Dominio (ETIQUETAS EN ESPAÑOL)
+Usuario "1" -- "0..1" Docente : asignado a >
+Alumno "0..*" o-- "1" Tutor : posee >
+Alumno "1" -- "0..*" AlumnoInscrito : registra >
+CicloEscolar "1" -- "0..*" AlumnoInscrito : incluye >
+Grupo "1" -- "0..*" AlumnoInscrito : coordina >
+
+Docente "1" -- "0..*" Grupo : tutela >
+CarreraTecnica "1" -- "0..*" Grupo : clasifica >
+AreaPropedeutica "1" -- "0..*" Grupo : especializa >
+
+Materia "1" -- "0..*" Clase : imparte en >
+Docente "1" -- "0..*" Clase : dicta >
+Aula "1" -- "0..*" Clase : contiene >
+Grupo "1" -- "0..*" Clase : organiza >
+
+ActividadParaescolar "1" -- "0..*" GrupoParaescolar : define >
+Docente "1" -- "1" GrupoParaescolar : dirige >
+
+Alumno "1" -- "0..*" AlumnoInscritoParaescolar : integrado en >
+GrupoParaescolar "1" -- "0..*" AlumnoInscritoParaescolar : matricula >
+
+AlumnoInscrito "1" *-- "0..*" Calificacion : obtiene >
+Unidad "1" -- "0..*" Calificacion : pondera >
+
+AlumnoInscrito "1" *-- "0..*" Asistencia : presencia >
+Clase "1" -- "0..*" Asistencia : verifica >
+
+@enduml

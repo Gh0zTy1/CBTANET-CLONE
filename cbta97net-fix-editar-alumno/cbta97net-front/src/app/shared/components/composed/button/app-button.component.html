@@ -1,0 +1,54 @@
+<style>
+  .icon-xs {
+    font-size: var(--icon-xs);
+  }
+
+  .icon-sm {
+    font-size: var(--icon-sm);
+  }
+
+  .icon-md {
+    font-size: var(--icon-md);
+  }
+
+  .icon-lg {
+    font-size: var(--icon-lg);
+  }
+
+  .icon-xl {
+    font-size: var(--icon-xl);
+  }
+</style>
+
+<button
+  z-button
+  zFull
+  [zType]="variant()"
+  [zSize]="size()"
+  [zType]="type()"
+  [zShape]="shape()"
+  [zLoading]="_isLoading()"
+  [zDisabled]="_isDisabled()"
+  (click)="onClick($event)"
+  class="cursor-pointer"
+>
+  <div 
+    [class.hidden]="_isLoading()"
+    class="flex items-center justify-center pointer-events-none min-w-0"
+    [class.gap-(--space-2)]="icon() && placeHolder()"
+  >
+    @if(icon()){
+      <span 
+        class="material-icons"
+        [ngClass]="[
+          'icon-' + iconSize(),
+          type() === 'ghost' ? 'text-gray-700' : 'text-white'
+        ]"
+      >
+        {{ icon() }}
+      </span>
+    }
+    <span class="truncate" [class.hidden]="!placeHolder()">{{ placeHolder() }}</span>
+    
+  </div>
+</button>

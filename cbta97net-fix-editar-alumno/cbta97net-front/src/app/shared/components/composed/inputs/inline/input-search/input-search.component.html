@@ -1,0 +1,28 @@
+<style>
+  .input-search-icon {
+    font-size: var(--icon-md);
+  }
+</style>
+
+<div class="flex flex-row items-center h-11 rounded-full border px-2 py-2 bg-white border-gray-300 transition-all focus-within:border-gray-600">
+    <div
+      class="shrink-0 pl-2 h-9 flex items-center justify-center text-gray-400 transition-all duration-200
+             disabled:cursor-not-allowed disabled:opacity-50 select-none"
+    >
+        <span class="material-icons input-search-icon">search</span>
+    </div>
+    <z-divider zOrientation="vertical" zSpacing="sm" />
+    <input
+      #input
+      type="text" 
+      [name]="name()"
+      [autocomplete]="autocomplete()"
+      [value]="value()"
+      [placeholder]="placeHolder()"
+      [attr.minlength]="min()"
+      [attr.maxlength]="max()"
+      [disabled]="disabled()"
+      (input)="onInput($event)"
+      class="w-full  bg-transparent font-normal text-(length:--text-sm) text-gray-700 placeholder:text-gray-400 outline-none truncate"
+    />
+</div>

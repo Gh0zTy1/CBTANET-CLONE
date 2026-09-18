@@ -1,0 +1,9 @@
+${AnsiColor.BRIGHT_GREEN}
+   __________ ______      ____  ______   __     __
+  / ____/ __ )_  __/___ _/ __ \/__  / | / /__  / /_
+ / /   / __  |/ / / __ `/ /_/ /  / /  |/ / _ \/ __/
+/ /___/ /_/ // / / /_/ /\__, /  / / /|  /  __/ /_
+\____/_____//_/  \__,_//____/  /_/_/ |_/\___/\__/
+${AnsiColor.DEFAULT}
+${AnsiColor.GREEN} >> Sistema de Gestión Escolar | CBTA 97 ${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_BLACK} > Status: [RUNNING] | Versión: ${application.version} ${AnsiColor.DEFAULT}

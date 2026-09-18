@@ -1,0 +1,31 @@
+[
+  {
+    "id": "e8a93e36-3a7b-4d43-9878-1a52b311fc6b",
+    "username": "api_admin",
+    "enabled": true,
+    "email": "system.api_admin@cbta97.edu.mx",
+    "firstName": "Super",
+    "lastName": "Admin",
+    "emailVerified": true,
+    "credentials": [
+      {
+        "type": "password",
+        "value": "Cbta97.Admin*2026!",
+        "temporary": false
+      }
+    ],
+    "realmRoles": [
+      "ADMIN"
+    ],
+    "clientRoles": {
+      "realm-management": [
+        "realm-admin",
+        "manage-users",
+        "manage-clients",
+        "manage-realm",
+        "view-users",
+        "view-realm"
+      ]
+    }
+  }
+]

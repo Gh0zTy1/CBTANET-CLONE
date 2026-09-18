@@ -1,0 +1,69 @@
+<style>
+  .icon-size {
+    font-size: var(--icon-sm);
+  }
+</style>
+<div class="w-full h-full min-h-full">
+  <div
+    class="p-(--space-3) border-3 border-dashed rounded-md flex flex-col transition-transform duration-300"
+    [ngClass]="{ 
+      'border-blue-500 bg-blue-50': _isDraggingOver(),
+      'border-gray-300': !_isDraggingOver()
+    }"
+    [class.drag-over]="_isDraggingOver()"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+  >
+    <div class="flex flex-col">
+      <div class="min-w-0 h-10 flex flex-row justify-between items-center">
+        <p class=" font-medium truncate">{{ label() }}</p>
+        @if(_fileExist()){
+          <div class="w-9" zTooltip="Descargar archivo">
+              <app-button
+                #downloadFileButton
+                size="sm"
+                icon="download"
+                iconSize="sm"
+                type="secondary"
+                shape="circle"
+                (click)="handleDownloadFile($event)"
+              />
+          </div>
+        }
+      </div>
+      @if(_fileExist()){
+        <span class="material-icons text-gray-400 py-(--space-6) self-center select-none" style="font-size: 4.5rem;">file_present</span>
+      } @if(!_fileExist()){
+        <span class="material-icons text-gray-400 py-(--space-6) self-center select-none" style="font-size: 4.5rem;">note_add</span>
+      }
+    </div>
+    <div class="flex flex-row items-center">
+      <div class="min-w-0 flex-1 inline-flex py-2 gap-2">
+        <div class="relative inline-block" zTooltip="Seleccionar archivo">
+          <label 
+            class="h-9 px-2 flex items-center gap-(--space-1) text-(length:--text-sm) rounded-full border-gray-600 bg-gray-600 hover:bg-gray-700 text-white font-normal transition-colors duration-300 cursor-pointer select-none"
+            for="{{ _inputId() }}"
+          >
+            <span class="material-icons icon-size">attach_file</span>
+          </label>
+          <input #file id="{{ _inputId() }}" type="file" class="absolute opacity-0 w-0 h-0 overflow-hidden" (change)="onUpload($event)" />
+        </div>
+        <div class="w-full min-w-0 flex items-center">
+          <p class="w-full block text-(length:--text-sm) truncate">{{ this._fileName() }}</p>
+        </div>
+      </div>
+        <div class="w-12" zTooltip="Subir archivo">
+          <app-button 
+            #saveFileButton
+            size="sm"
+            icon="cloud_upload"
+            iconSize="sm"
+            type="default"
+            shape="default"
+            (clicked)="onFileSave($event)"
+          />
+        </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+
+<div class="h-dvh inset-0 flex justify-center items-center bg-linear-to-r bg-(--primary-background)">
+    <div class="bg-white w-full max-w-[440px] p-(--space-5) rounded-lg shadow-[0_10px_25px_#333333] text-center border-t-6 border-t-[#BF360C] space-y-(--space-6)">
+        <!-- Card header -->
+        <div class="flex flex-row items-center justify-center gap-4">
+            <img src="cbtalogo.png" alt="Escudo CBTA 97" class="w-[90px] h-auto">
+            <div>
+                <h1 class="text-(--primary-background) text-(length:--text-h3) font-bold"><strong>CBTA97Net</strong></h1>
+                <p class="text-[#333333] text-(length:--text-md) font-medium">Sistema de Control Escolar</p>
+            </div>
+        </div>
+            
+        <form class="login-form space-y-(--space-4)">
+
+            <div class="text-left">
+                <input-number-icon
+                    #IdInput 
+                    icon="person" 
+                    label="ID de Usuario" 
+                    placeHolder="Introduzca su ID de usuario" 
+                    minLength="0" 
+                    maxLength="20" 
+                    [allowDecimals]="false" 
+                    [allownNegatives]="false" 
+                />
+            </div>
+
+            <div class="text-left">
+                <input-password-icon-outline
+                    #passwordInput
+                    label="Contraseña"
+                    class="bold-input" 
+                    placeHolder="•••••••••••" 
+                    minLength="0" 
+                    maxLength="20" 
+                />
+            </div>
+
+            @if(isErrorMessageShowing()) {
+                <div class="grid w-full max-w-xl text-start items-start gap-4">
+                    <alert-composed status="danger" title="Error al iniciar sesión." [description]="customDescription" />
+    
+                    <ng-template #customDescription>
+                        <p class="text-(length:--text-xs)">{{ errorMessage() }}</p>
+                    </ng-template>
+                </div>
+            }
+
+            <div class="w-full mt-6">
+                <app-button 
+                    #loginButton
+                    size="xl"
+                    placeHolder="iniciar sesión"
+                    (clicked)="handleLogin($event)"
+                />
+            </div>
+        </form>
+
+        <!-- Card footer -->
+        <div>
+            <z-divider />
+            <small>
+                <p class="my-1  text-[#434343]">Centro de Bachillerato Tecnológico Agropecuario No. 97</p>
+                <p class="my-1 font-semibold text-[#BF360C]">Basconcobe, Sonora</p>
+            </small>
+        </div>
+    </div>
+</div>

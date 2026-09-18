@@ -1,0 +1,48 @@
+<div class="flex flex-col gap-4 mt-2">
+    <drag-drop-input
+      #uploadZone
+      acceptAttribute=".xlsx, .xls"
+      label="Arrastra el archivo Excel aquí"
+      [allowedExtensions]="['xlsx', 'xls']"
+      [maxFileSizeMB]="20"
+      [showDownload]="false"
+      (onError)="manejarErrorInputArchivos($event)"
+      (onSucces)="manejarAncladoExitoso()"
+    />
+
+    @if(esError()){
+      <div class="grid w-full text-start items-start">
+          <alert-composed status="danger" [title]="tituloError()" [description]="customDescription" />
+
+          <ng-template #customDescription>
+              <p class="text-(length:--text-xs)">{{ mensajeError() }}</p>
+          </ng-template>
+      </div>
+    }
+
+    <div class="w-full justify-end inline-flex gap-2">
+      <div class="w-24">
+        <app-button
+          #cancelButton
+          size="default"
+          iconSize="sm"
+          type="outline"
+          shape="default"
+          placeHolder="Cancelar"
+          (click)="cerrarModal($event)"
+        />
+      </div>
+      <div class="w-28">
+          <app-button
+            #saveButton
+            icon="cloud_upload"
+            size="default"
+            iconSize="sm"
+            type="default"
+            shape="default"
+            placeHolder="Importar"
+            (clicked)="manejarImportadoArchivo($event)"
+          />
+      </div>
+    </div>
+</div>

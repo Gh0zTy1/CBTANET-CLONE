@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-SYSTEM" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar Alumno</title>
+    <link rel="stylesheet" href="../CrearGrupo/CrearNuevoGrupo.css" />
+    <link rel="stylesheet" href="RegistrarAlumno.css" />
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="header-content">
+            <img src="../resources/cbtalogo.jpeg" alt="Logo" class="logo" />
+            <div class="header-text">
+                <h1>Registrar Nuevo Alumno</h1>
+                <p class="subtitle">Ingrese los datos personales y documentos del alumno.</p>
+            </div>
+        </div>
+    </header>
+
+    <form id="form-registrar-alumno">
+
+        <div class="perfil-upload-container">
+            <label for="fotoAlumno">Foto del Alumno</label>
+            <img id="fotoPreview" src="../resources/placeholder-user.webp" alt="Vista previa de la foto" />
+            <input type="file" id="fotoAlumno" accept="image/jpeg, image/png" required />
+            <small>Subir foto (JPG o PNG)</small>
+        </div>
+
+        <h2>Datos del Alumno</h2>
+        <div class="group-details">
+            <div class="form-field">
+                <label for="matricula">Matrícula</label>
+                <input type="text" id="matricula" placeholder="Ej. 2024123456" pattern="^\d+$" inputmode="numeric" required />
+            </div>
+            <div class="form-field">
+                <label for="curp">CURP</label>
+                <input type="text" id="curp" placeholder="CURP 18 caracteres" required minlength="18" maxlength="18" />
+            </div>
+            <div class="form-field">
+                <label for="nombre">Nombre(s)</label>
+                <input type="text" id="nombre" placeholder="Nombre(s)" required />
+            </div>
+            <div class="form-field">
+                <label for="apellidoPaterno">Apellido Paterno</label>
+                <input type="text" id="apellidoPaterno" placeholder="Apellido Paterno" required />
+            </div>
+            <div class="form-field">
+                <label for="apellidoMaterno">Apellido Materno</label>
+                <input type="text" id="apellidoMaterno" placeholder="Apellido Materno" required />
+            </div>
+            <div class="form-field">
+                <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                <input type="date" id="fechaNacimiento" required />
+            </div>
+            <div class="form-field">
+                <label for="nss">Número de Seguro Social (NSS)</label>
+                <input type="text" id="nss" placeholder="NSS (Opcional)" />
+            </div>
+            <div class="form-field">
+                <label for="poliza">Póliza Seguro Escuela</label>
+                <input type="text" id="poliza" placeholder="Póliza (Opcional)" />
+            </div>
+        </div>
+
+        <hr />
+        <h2>Datos del Tutor Legal</h2>
+        <div class="group-details">
+            <div class="form-field">
+                <label for="tutor_nombre">Nombre(s) del Tutor</label>
+                <input type="text" id="tutor_nombre" placeholder="Nombre(s) del tutor" required />
+            </div>
+            <div class="form-field">
+                <label for="tutor_apellidoPaterno">Apellido Paterno</label>
+                <input type="text" id="tutor_apellidoPaterno" placeholder="Apellido paterno" required />
+            </div>
+            <div class="form-field">
+                <label for="tutor_apellidoMaterno">Apellido Materno</label>
+                <input type="text" id="tutor_apellidoMaterno" placeholder="Apellido materno" required />
+            </div>
+            <div class="form-field">
+                <label for="tutor_telefono">Teléfono</label>
+                <input type="tel" id="tutor_telefono" placeholder="Teléfono de contacto" required />
+            </div>
+            <div class="form-field">
+                <label for="tutor_fechaNacimiento">Fecha de Nacimiento (Opcional)</label>
+                <input type="date" id="tutor_fechaNacimiento" />
+            </div>
+        </div>
+
+        <hr />
+        <h2>Área Educativa (Condiciones)</h2>
+        <div class="form-field">
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="condicionEspecial" />
+                <label for="condicionEspecial">¿Tiene una condición especial?</label>
+            </div>
+        </div>
+        <div class="form-field" id="campo-descripcion-condicion" style="display: none;">
+            <label for="condicionDescripcion">Anotaciones (Condición del alumno)</label>
+            <textarea id="condicionDescripcion" rows="4" placeholder="Describa la condición o anotaciones relevantes..."></textarea>
+        </div>
+
+        <hr />
+        <h2>Documentos Requeridos</h2>
+        <p>Adjunte los 3 documentos escaneados del alumno (PDF).</p>
+
+        <div class="document-upload">
+            <div class="form-field">
+                <label for="actaNacimiento">1. Acta de Nacimiento</label>
+                <input type="file" id="actaNacimiento" accept="application/pdf" required />
+            </div>
+            <div class="form-field">
+                <label for="certificadoSecundaria">2. Certificado de Secundaria</label>
+                <input type="file" id="certificadoSecundaria" accept="application/pdf" required />
+            </div>
+            <div class="form-field">
+                <label for="documentoCurp">3. Documento CURP</label>
+                <input type="file" id="documentoCurp" accept="application/pdf" required />
+            </div>
+        </div>
+
+        <footer class="form-actions">
+            <button type="submit" class="btn btn-primary" id="btn-registrar">Registrar Alumno</button>
+            <button type="button" class="btn btn-secondary" id="btn-cancelar">Cancelar</button>
+        </footer>
+    </form>
+
+    <div id="status-message" class="status-message" style="display: none;"></div>
+</div>
+<script src="RegistrarAlumno.js"></script>
+</body>
+</html>

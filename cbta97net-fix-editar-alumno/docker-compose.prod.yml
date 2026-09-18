@@ -1,0 +1,168 @@
+
+# notacion: <nombre-sistema>:<entorno>:<version>
+name: cbta97net-prod-v1
+
+services:
+  # Servidor de autenticacion
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.4.7
+    container_name: keycloak-server
+    command: start-dev --import-realm
+    environment:
+      - KC_BOOTSTRAP_ADMIN_USERNAME=superadmin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=${KC_ADMIN_PASS}
+      - KC_RUN_IN_CONTAINER=true
+      - KC_HTTP_PORT=9090
+      - KC_DB=postgres
+      - KC_DB_URL=jdbc:postgresql://keycloak-db:5432/keycloak
+      - KC_DB_USERNAME=keycloak
+      - KC_DB_PASSWORD=${KC_DB_PASS}
+      - KC_HEALTH_ENABLED=true
+    ports:
+      - "9090:9090"
+    volumes:
+      # se importa el real.json guardado en la raiz del proyecto. Contiene toda la definicion de roles
+      # permisos, apis de acceso a Keycloak para el backend, etc. Solo tiene permiso de leerlo a la hora
+      # del arranque de keycloak
+      - ./cbta97-realm-prod.json:/opt/keycloak/data/import/cbta97-realm-prod-realm.json:ro
+    restart: unless-stopped
+    depends_on:
+      keycloak-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/9000 && echo -e 'GET /health/ready HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n' >&3 && cat <&3 | grep '200 OK' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 70s
+    networks:
+      - cbta97-network
+
+  # base de datos exclusiva para almacenar la informacion de Keycloak
+  keycloak-db:
+    image: postgres:16-alpine
+    container_name: keycloak-db
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=${KC_DB_PASS}
+    volumes:
+      - keycloak-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keycloak"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - cbta97-network
+
+  # Base de datos general MariaDB con soporte TDE y Usuario CRUD
+  cbta97-db:
+    image: mariadb:11.4
+    container_name: cbta97-db
+    environment:
+      MARIADB_ROOT_PASSWORD: ${CBTA_API_ROOT_PASS}
+      MARIADB_DATABASE: cbta97net
+      MARIADB_USER: cbta97_api_user
+      MARIADB_PASSWORD: ${CBTA_API_PASS}
+    ports: 
+      - "3306:3306" 
+    volumes:
+      - cbta97-db-data:/var/lib/mysql
+      - ./mariadb-config/tde.cnf:/etc/mysql/conf.d/tde.cnf:ro
+      - ./mariadb-config/keys.txt:/etc/mysql/encryption/keys.txt:ro
+      - ./mariadb-config/init-scripts:/docker-entrypoint-initdb.d:ro
+    networks:
+      - cbta97-network
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  cbta97-archivos:
+    image: atmoz/sftp
+    container_name: cbta97-archivos
+    ports:
+      - "2222:22"
+    # Docker Compose no permite concatenar alias dentro de strings de comandos directamente. 
+    # Por seguridad y sintaxis, aquí debes escribir la contraseña del alias sftp-pass de forma manual.
+    command: admin_sftp:${CBTA_SFTP_PASS}:1001:1001:uploads
+    networks:
+      - cbta97-network
+
+  # servidor web para acceder a los modulos de CBTa97
+  cbta97-api:
+    build: 
+      context: ./cbta97net-backend
+      dockerfile: Dockerfile
+    container_name: cbta97-api
+    environment:
+      # database config
+      DB_HOST: cbta97-db
+      DB_USER: cbta97_api_user
+      DB_PASSWORD: ${CBTA_API_PASS}
+      DB_NAME: cbta97net
+      # keycloak config
+      KC_HOST: keycloak-server
+      KC_PORT: 9090
+      KC_SERVER_URL: "http://keycloak-server:9090"
+      KC_CLIENT_SECRET: ${KC_CLIENT_SECRET}
+      KC_REALM_NAME: cbta97-realm-prod
+      KC_CLIENT_ID: cbta97-client-api-rest
+      KC_REALM_MASTER: cbta97-realm-prod
+      KC_ADMIN_CLI: cbta97-client-api-rest
+      KC_USER_CONSOLE: api_admin
+      KC_PASSWORD_CONSOLE: ${KC_ADMIN_PASS}
+      KC_CLIENT_SECRET_ADMIN: ${KC_CLIENT_SECRET}
+      # sftp config
+      SFTP_HOST: cbta97-archivos
+      SFTP_PORT: 22
+      SFTP_USER: admin_sftp
+      SFTP_PASSWORD: ${CBTA_SFTP_PASS}
+      # cors config
+      CORS_ALLOWED_ORIGINS: "${CORS_ALLOWED_ORIGINS:-http://localhost:4200,http://localhost:80,http://localhost,http://62.84.186.83:8080,http://62.84.186.83}"
+    ports:
+      - "8080:8080" 
+    depends_on:
+      cbta97-db:
+        condition: service_healthy 
+      keycloak:
+        condition: service_healthy
+    networks:
+      - cbta97-network
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 1536M
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/api/v1/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 5 
+      start_period: 60s
+
+  # Servidor NGINX para alojar el Frontend Angular
+  cbta97-front:
+    build:
+      context: ./cbta97net-front
+      dockerfile: Dockerfile
+    container_name: cbta97-front
+    ports:
+      - "80:80"
+    depends_on:
+      - cbta97-api
+    networks:
+      - cbta97-network
+    restart: unless-stopped
+
+
+networks:
+  cbta97-network:
+    driver: bridge
+
+volumes:
+  cbta97-db-data:
+  keycloak-db-data:

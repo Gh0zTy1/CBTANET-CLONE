@@ -1,0 +1,25 @@
+<style>
+  #sidebar-item-icon {
+    font-size: var(--icon-sm);
+  }
+</style>
+
+<li class="ml-(--space-5) w-full">
+  <a
+    class="flex flex-row items-center gap-(--space-2) w-[90%] p-(--space-2) text-(length:--text-sm) no-underline text-white/80 transition-all duration-200 border-l-3 border-transparent hover:text-white hover:bg-white/10 hover:border-[#bbbbbb]"
+    [routerLink]="link()"
+    routerLinkActive="bg-white/10 border-white"
+  >
+    <span
+      id="sidebar-item-icon" 
+      class="material-icons"
+      routerLinkActive="text-white"
+    >
+      {{ icon() }}
+    </span>
+    <span routerLinkActive="text-white">
+      {{ label() }}
+    </span>
+  </a>
+</li>
+

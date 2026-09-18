@@ -1,0 +1,46 @@
+<div class="w-full flex flex-row items-center justify-between">
+  <z-pagination
+    [zTotal]="totalPages()"
+    [zPageIndex]="page()"
+    (zPageIndexChange)="setPage($event)"
+    [zContent]="content"
+  />
+  <span class="text-(length:--text-xs) text-slate-500">{{ paginationDescription() }}</span>
+</div>
+
+<ng-template #content>
+  <div class="w-full">
+    <ul z-pagination-content >
+
+      <!-- Anterior -->
+      <li z-pagination-item>
+        <z-pagination-previous
+          (click)="prev()"
+          [zDisabled]="page() === 1 || _isDisabled()"
+        />
+      </li>
+  
+      <!-- Páginas -->
+      @for (item of visiblePages(); track $index) {
+        <li z-pagination-item>
+          <button
+            type="button"
+            z-pagination-button
+            [zDisabled]="_isDisabled()"
+            [zActive]="item === page()"
+            (click)="setPage(item)">
+            {{ item }}
+          </button>
+        </li>
+      }
+  
+      <!-- Siguiente -->
+      <li z-pagination-item>
+        <z-pagination-next
+          (click)="next()"
+          [zDisabled]="page() === totalPages() || _isDisabled()"
+        />
+      </li>
+    </ul>
+  </div>
+</ng-template>

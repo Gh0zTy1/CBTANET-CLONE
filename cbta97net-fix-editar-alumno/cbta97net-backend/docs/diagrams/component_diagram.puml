@@ -1,0 +1,65 @@
+@startuml
+' Configuración de estilo UML clásico (Blanco y Negro)
+
+title Diagrama de Módulos de *CBTa97net-backend*
+
+skinparam linetype ortho
+skinparam nodesep 70
+skinparam ranksep 60
+skinparam backgroundColor white
+
+skinparam component {
+    BackgroundColor white
+    BorderColor black
+    ArrowColor black
+    FontColor black
+    Style uml2
+}
+
+' Declaración de Componentes
+component "Usuarios" as Usuarios
+component "Personal" as Personal
+component "Horario" as Horario
+
+component "Academica" as Academica
+component "Grupos" as Grupos
+component "Grupos\nParaescolares" as GruposParaescolares
+component "Alumnado" as Alumnado
+component "Estructura" as Estructura
+
+' -- Forzar el Layout (Posicionamiento relativo oculto) --
+Academica -[hidden]right- Grupos
+Grupos -[hidden]right- Personal
+Personal -[hidden]up- Usuarios
+Personal -[hidden]down- Horario
+
+Academica -[hidden]down- GruposParaescolares
+GruposParaescolares -[hidden]down- Alumnado
+
+Alumnado -[hidden]right- Estructura
+Estructura -[hidden]right- Horario
+
+' -- Relaciones (Dependencias) --
+' Desde Academica
+Academica -right-> Grupos
+Academica ---> Personal
+Academica ---> Estructura
+
+' Desde Grupos
+Grupos ---> Horario
+Grupos ---> Estructura
+
+' Desde Grupos Paraescolares
+GruposParaescolares -down-> Alumnado
+GruposParaescolares ---> Horario
+GruposParaescolares ---> Estructura
+
+' Eje Vertical Derecho
+Personal -up-> Usuarios
+Horario -up-> Personal
+
+' Hacia Estructura (Nivel Inferior)
+Alumnado -right-> Estructura
+Horario -left-> Estructura
+
+@enduml

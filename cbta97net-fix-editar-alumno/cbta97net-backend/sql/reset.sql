@@ -1,0 +1,5 @@
+USE cbta97net;
+
+DROP DATABASE cbta97net;
+CREATE DATABASE cbta97net;
+

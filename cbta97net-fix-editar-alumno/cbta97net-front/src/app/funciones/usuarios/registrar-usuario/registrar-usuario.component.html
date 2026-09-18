@@ -1,0 +1,133 @@
+<div class="flex flex-col h-full">
+    <header class="mb-(--space-6)">
+        <div class="flex flex-col">
+            <h1 class="text-(length:--text-title) font-bold">Registrar Usuario</h1>
+            <p class="text-gray-400 text-(length:--text-md) font-regular">Ingrese los datos personales del usuario.</p>
+        </div>
+    </header>
+
+    <form #form_registrar_usuario autocomplete="off" autocapitalize="true">
+        <h2 class="text-(length:--text-lead) text-gray-600 mb-(--space-3) font-semibold">Datos del Usuario</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-(--space-4)">
+            <input-text-outline
+                #nombre 
+                name="user_new_name"
+                autocomplete="off"
+                min="0" 
+                max="50"
+                placeHolder="Nombre"
+            />
+
+            <input-text-outline
+                #apellido_paterno    
+                name="user_paterlan_surname"
+                autocomplete="off"
+                min="0" 
+                max="50" 
+                placeHolder="Apellido Paterno"
+            />
+
+            <input-text-outline
+                #apellido_materno
+                name="user_maternal_surname"
+                autocomplete="off"
+                min="0" 
+                max="50" 
+                placeHolder="Apellido Materno"
+            />
+
+            <input-text-outline
+                #curp 
+                name="user_curp"
+                autocomplete="off"
+                min="18" 
+                max="18" 
+                placeHolder="CURP"
+            />
+        </div>
+
+        <z-divider zSpacing="lg" />
+
+        <h2 class="text-(length:--text-lead) text-gray-600 mb-(--space-3) font-semibold">Información de Contacto</h2>
+        <div class="flex flex-wrap flex-row gap-(--space-4)">
+            <div class="w-92 min-w-[300px]">
+                <input-text-outline 
+                    #email 
+                    name="user_new_mail"
+                    autocomplete="email"
+                    min="0" 
+                    max="50"
+                    placeHolder="Correo Electrónico"
+                /> 
+            </div>
+            
+            <div class="w-92 min-w-[300px]">
+                <input-cellphone-outline
+                    #telefono
+                    name="phone"
+                    autocomplete="tel"
+                    min="14" 
+                    max="14"
+                    [cellphoneNumberLength]="10" 
+                    placeHolder="Teléfono"
+                />
+            </div>
+        </div>
+    </form>
+
+    <z-divider zSpacing="lg" /> 
+
+    <form autocomplete="off" autocapitalize="true" class="mb-(--space-6)">
+        <h2 class="text-(length:--text-lead) text-gray-600 mb-(--space-3) font-semibold">Credenciales</h2>
+        <!--Alert-->
+        <div class="w-[50%] mb-(--space-5)">
+            <alert-composed status="warning" title="Por seguridad tome en cuenta lo siguiente:" [description]="customDescription" />
+
+            <ng-template #customDescription>
+                <ol class="text-(length:--text-xs) list-decimal list-inside">   
+                    <li>Usa de 8 a 12 caracteres minimo</li>
+                    <li>Combina letras, números y caracteres especiales.</li>
+                    <li>No utilices secuencias de letras o números.</li>
+                    <li>Evita la sustitución: «canguro» y «c@ngur0».</li>
+                </ol>
+            </ng-template>
+        </div>
+
+        <div class="flex flex-row gap-(--space-4) mb-(--space-6)">
+            <div class="w-92 min-w-[300px]">
+                <input-password-outline
+                    #contrasena
+                    name="new_password"
+                    autocomplete="new-password"
+                    min="8" 
+                    max="32"
+                    placeHolder="Contraseña"
+                    [allowSpaces]="false"
+                />
+            </div>
+            
+            <div class="w-92 min-w-[300px]">
+                <input-password-outline
+                    #confirmar_contrasena
+                    name="confirm_password"
+                    autocomplete="new-password"
+                    min="8" 
+                    max="32"
+                    placeHolder="Confirmar Contraseña"
+                    [allowSpaces]="false"
+                />
+            </div>
+        </div>
+
+        <div class="w-full flex justify-end mb-(--space-6)">
+            <div class="w-48">
+                <app-button
+                    #boton_registrar
+                    size="lg"
+                    placeHolder="Registrar Usuario"
+                    (clicked)="manejarRegistrarUsuario($event)"
+                />
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,79 @@
+<div id="addClassModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Agregar clase</h2>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="modal-materia">Nombre de materia</label>
+                <input type="text" id="modal-materia-name" disabled>
+            </div>
+            <div class="form-group">
+                <label>Horarios</label>
+                <div class="horario-adder">
+                    <select id="horario-dia">
+                        <option value="0">Lunes</option>
+                        <option value="1">Martes</option>
+                        <option value="2">Miércoles</option>
+                        <option value="3">Jueves</option>
+                        <option value="4">Viernes</option>
+                        <option value="5">Sábado</option>
+                        <!-- <option value="6">Domingo</option> -->
+                    </select>
+                    <select id="horario-inicio">
+                        <option value="">Selecciona hora inicio</option>
+                        <option value="7:00">7:00</option>
+                        <option value="8:00">8:00</option>
+                        <option value="9:00">9:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <!-- <option value="14:00">14:00</option> -->
+                        <!-- <option value="15:00">15:00</option> -->
+                    </select>
+                    <select id="horario-fin">
+                        <option value="">Selecciona hora fin</option>
+                        <option value="8:00">8:00</option>
+                        <option value="9:00">9:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <!-- <option value="15:00">15:00</option> -->
+                        <!-- <option value="16:00">16:00</option> -->
+                    </select>
+                    <button id="add-horario-btn" class="add-btn">+</button>
+                </div>
+                <table class="horarios-list-table">
+                    <thead>
+                        <tr>
+                            <th>Día. Semana</th>
+                            <th>Hora de Inicio</th>
+                            <th>Hora de Fin</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="horarios-list-body"></tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <label for="modal-docente">Nombre del docente</label>
+                <select id="modal-docente"></select>
+            </div>
+            <div class="form-group">
+                <label for="modal-aula">Aula</label>
+                <select id="modal-aula">
+                    <option>204av</option>
+                    <option>101</option>
+                    <option>Laboratorio A</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="cancel-btn" class="btn btn-secondary">Cancelar</button>
+            <button id="confirm-btn" class="btn btn-primary">Confirmar</button>
+        </div>
+    </div>
+</div>

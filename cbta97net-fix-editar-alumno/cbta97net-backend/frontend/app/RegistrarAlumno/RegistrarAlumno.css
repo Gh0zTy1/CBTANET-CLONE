@@ -1,0 +1,104 @@
+/* Estilos específicos para Registrar Alumno */
+.group-details {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* --- NUEVOS ESTILOS PARA FOTO DE PERFIL --- */
+.perfil-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 2px dashed #ced4da;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+}
+
+.perfil-upload-container label {
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 0; /* Anula el label por defecto */
+}
+
+#fotoPreview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #dee2e6;
+    object-fit: cover;
+    background-color: #fff;
+    margin-top: 0.5rem;
+}
+
+#fotoAlumno {
+    width: 100%;
+    max-width: 300px;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+/* --- FIN DE ESTILOS PARA FOTO DE PERFIL --- */
+
+
+.document-upload {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-field input[type="file"] {
+    background-color: #fff;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Estilos para el checkbox de condición especial */
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.checkbox-wrapper input[type="checkbox"] {
+    width: auto;
+    height: 1.2rem;
+    width: 1.2rem;
+}
+.checkbox-wrapper label {
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+.form-field textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.status-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.status-success {
+    background-color: #e8f5e8;
+    color: #2e7d32;
+    border: 1px solid #4CAF50;
+}
+
+.status-error {
+    background-color: #fde8e8;
+    color: #c62828;
+    border: 1px solid #f44336;
+}

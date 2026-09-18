@@ -1,0 +1,72 @@
+<style>
+    .student-table-icon {
+        font-size: var(--icon-md);
+    }
+</style>
+
+<div class="h-102">
+    <table z-table z-type="fixed" zSize="compact">
+        <thead z-table-header>
+            <tr z-table-row>
+                <th class="w-[15%]" z-table-head>Matrícula</th>
+                <th class="w-[20%]" z-table-head>CURP</th>
+                <th class="w-[55%]" z-table-head>Nombre</th>
+                <th class="w-[10%] text-center!" z-table-head>Acciones</th>
+            </tr>
+        </thead>
+        <tbody z-table-body>
+            @if (_estaCargando()) {
+                @for (row of _skeletonRows; track $index) {
+                    <tr z-table-row>
+                        <td z-table-cell>
+                            <z-skeleton class="h-9" />
+                        </td>
+                        <td z-table-cell>
+                            <z-skeleton class="h-9" />
+                        </td>
+                        <td z-table-cell>
+                            <z-skeleton class="h-9" />
+                        </td>
+                        <td z-table-cell class="flex items-center justify-center gap-4">
+                            <z-skeleton class="w-9 h-9 rounded-full" />
+                            <z-skeleton class="w-9 h-9 rounded-full" />
+                        </td>
+                    </tr>
+                }
+            } @else {
+            @for(student of _alumnos(); track student.matricula) {
+                    <tr z-table-row>
+                        <td z-table-cell>{{ student.matricula }}</td>
+                        <td z-table-cell>{{ student.curp }}</td>
+                        <td z-table-cell>
+                            {{ student.nombre }} {{ student.apellidoPaterno }} {{ student.apellidoMaterno }}
+                        </td>
+                        <td z-table-cell class="flex flex-row justify-center gap-3">
+                            <button 
+                                type="button"
+                                (click)="irEditarAlumno(student)"
+                                [disabled]="_bloquearBotones()"
+                                class="flex items-center justify-center rounded-full hover:bg-gray-300 select-none"> 
+                                <span class="material-icons student-table-icon text-muted-foreground p-1.5 hover:text-[--warning]">edit</span>
+                            </button>
+                            <button 
+                                type="button"
+                                [disabled]="_bloquearBotones()"
+                                (click)="abrirConfirmacionEliminacion(student)"
+                                class="flex items-center justify-center rounded-full hover:bg-gray-300 select-none">
+                                <span class="material-icons student-table-icon text-muted-foreground p-1.5 hover:text-destructive/80">delete</span>
+                            </button>
+                        </td>
+                    </tr>
+                }
+                @empty {
+                    <tr z-table-row>
+                        <td z-table-cell [attr.colspan]="4" class="h-90 text-center text-slate-600">
+                            Sin resultados.
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

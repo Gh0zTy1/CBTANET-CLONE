@@ -1,0 +1,56 @@
+<style>
+    #sidebar-section-icon{
+        font-size: var(--icon-md);
+    }
+</style>
+
+<nav
+    class="w-full h-full overflow-y-auto pt-5 pb-10 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+  >
+    <ul class="list-none p-0 m-0 space-y-(--space-2)">
+    
+        <!-- home section -->
+        <li>
+            <a
+                class="flex items-center p-(--space-3) text-(length:--text-md) text-white/90 no-underline transition-all duration-200 border-l-3 border-transparent hover:bg-white/15 hover:border-white hover:text-white select-none cursor-pointer"
+                [routerLink]="['/app/inicio']"
+                routerLinkActive="bg-white/15 border-white text-white"
+            >
+                <span id="sidebar-section-icon" class="material-icons mr-(--space-2) text-[20px] select-none">home</span>
+                Inicio
+            </a>
+        </li>
+
+        <!-- students section -->
+        <li>
+            <sidebar-nav-section label="Alumnos" icon="school">
+                <sidebar-nav-item
+                    icon="person_add"
+                    label="Registrar Alumno"
+                    link="/app/alumnos/registrar-alumno"
+                />
+                <sidebar-nav-item
+                    icon="folder"
+                    label="Administrar Alumnos"
+                    link="/app/alumnos/administracion"
+                />
+            </sidebar-nav-section>
+        </li>
+
+        <!-- users section -->
+        <li>
+            <sidebar-nav-section label="Usuarios" icon="group">
+                <sidebar-nav-item
+                    icon="person_add"
+                    label="Registrar Usuario"
+                    link="/app/usuarios/registrar-usuario"
+                />
+                <sidebar-nav-item
+                    icon="manage_accounts"
+                    label="Administrar Usuarios"
+                    link="/app/usuarios/administrar-usuarios"
+                />
+            </sidebar-nav-section>
+        </li>
+    </ul>
+</nav>

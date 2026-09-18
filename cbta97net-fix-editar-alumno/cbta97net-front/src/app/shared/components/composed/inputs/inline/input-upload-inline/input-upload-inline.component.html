@@ -1,0 +1,45 @@
+<div class="inline-flex gap-4">
+  <div class="min-w-0 flex items-center py-2 gap-2">
+    <div class="relative inline-block">
+      <label  
+        class="h-9 px-2 flex items-center gap-(--space-1) text-(length:--text-sm) rounded-md border-gray-600 bg-gray-600 hover:bg-gray-700 text-white font-normal transition-colors duration-300 cursor-pointer select-none"
+        for="file-selector"
+      >
+        <p class="text-(length:--text-xs) font-medium">seleccionar</p>
+      </label>
+      <input class="absolute opacity-0 w-0 h-0 overflow-hidden" id="file-selector" type="file" (change)="onUpload($event)" />
+    </div>
+    <div class="w-fit min-w-0 flex items-center">
+      <p class="w-fit block text-(length:--text-sm) truncate">{{ _fileName() }}</p>
+    </div> 
+  </div>
+  <div class="inline-flex items-center gap-1">
+    @if(_fileExist()){
+      @if(showDownload()) {
+        <div class="w-9" zTooltip="Descargar">
+            <app-button
+              #buttonDownloadFile
+              size="sm"
+              icon="download"
+              iconSize="sm"
+              type="secondary"
+              shape="circle"
+              (click)="onDownload($event)"
+            />
+        </div>
+      }
+      @if(showClose()) {
+        <div class="w-9" zTooltip="Limpiar seleccion">
+          <app-button
+            size="sm"
+            icon="close"
+            iconSize="sm"
+            type="secondary"
+            shape="circle"
+            (click)="onSelectionClean($event)"
+          />
+        </div>
+      }
+    }
+  </div>
+</div>

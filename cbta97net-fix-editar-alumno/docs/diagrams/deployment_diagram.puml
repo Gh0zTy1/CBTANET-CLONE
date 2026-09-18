@@ -1,0 +1,82 @@
+@startuml deployment_diagram
+
+skinparam style strictuml
+skinparam linetype ortho
+skinparam monochrome true
+
+node "<<device>>\nDispositivo del Usuario" as Cliente {
+    node "Navegador Web" {
+        artifact "cbta97net-front" as Frontend
+    }
+}
+
+node "Servidor de Aplicaciones (Docker Host)" as Host {
+    
+    node "Contenedor: NGINX Server" as FrontSrv {
+        artifact "Angular Compiled Assets" as Assets
+        note right of Assets
+            Desplegado como App empaquetada
+            compilada por Angular.
+            Usa NGINX como Load Balancer/Servidor.
+        end note
+    }
+
+    node "Contenedor: cbta97-api" as BackendSrv {
+        artifact "cbta97net-backend" as API
+        note right of API
+            Unidad de negocio en donde se centralizan
+            todas las API's con sus funcionalidades del 
+            sistema.
+        end note
+    }
+
+    node "Contenedor: keycloak-server" as IdentitySrv {
+        artifact "Keycloak Auth" as KC
+        note right of KC
+            Servidor de identidad y autenticación
+            encargado de gestionar usuarios, roles
+            y permisos.
+        end note
+    }
+
+    node "Contenedor: cbta97-db" as MainDBServer {
+        database "MySQL (cbta97net)" as MainDB
+        note right of MainDB
+            Base de datos relacional
+            encargada de almacenar
+            los datos del sistema.
+        end note
+    }
+
+    node "Contenedor: keycloak-db" as AuthDBServer {
+        database "PostgreSQL (keycloak)" as AuthDB
+        note right of AuthDB
+            Base de datos relacional
+            encargada de almacenar
+            los datos de autenticación.
+        end note
+    }
+
+    node "Contenedor: cbta97-archivos" as SFTPSrv {
+        artifact "SFTP (Uploads)" as Storage
+        note right of Storage
+            Servidor de archivos
+            encargado de almacenar
+            los documentos de los alumnos
+            y docentes.
+        end note
+    }
+}
+
+' Relaciones de Despliegue
+Cliente -- FrontSrv : <<HTTP/HTTPS>>
+Cliente -- BackendSrv : <<REST API Call>>
+
+FrontSrv -- BackendSrv : <<HTTP>>
+BackendSrv -- MainDBServer : <<JDBC>>
+BackendSrv -- IdentitySrv : <<OIDC>>
+BackendSrv -- SFTPSrv : <<SFTP>>
+
+IdentitySrv -- AuthDBServer : <<JDBC>>
+
+@enduml

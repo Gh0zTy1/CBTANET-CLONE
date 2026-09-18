@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Paraescolares</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="AdministrarParaescolar.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo-text">
+            <img src="logoCBTA.svg" alt="cbta97" id="logo">
+            <div class="header-text">
+                <h1>Administrar Paraescolares</h1>
+                <span>[Ciclo 2025-2026]</span>
+            </div>
+        </div>
+        <button class="btn btn-primary" onclick="openModal()"> 
+            <i class="fas fa-plus"></i> Nueva Paraescolar
+        </button>
+    </div>
+
+    <div class="toolbar">
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" placeholder="Buscar actividad..." onkeyup="searchTable(this.value)">
+        </div>
+        <div class="pagination">
+            <button class="btn btn-secondary" onclick="prevPage()"><i class="fas fa-chevron-left"></i></button>
+            <span id="pageInfo">Página 1</span>
+            <button class="btn btn-secondary" onclick="nextPage()"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div class="card">
+        <table id="tablaParaescolares">
+            <thead>
+                <tr>
+                    <th>Actividad</th>
+                    <th>Descripción</th>
+                    <th style="text-align: right;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Filas generadas dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal Crear/Editar -->
+    <div class="modal-overlay" id="modalParaescolar">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Nueva Paraescolar</h3>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nombre de la Actividad</label>
+                    <input type="text" id="actividadNombre" class="form-input" placeholder="Ej. Danza Folklórica">
+                </div>
+
+                <div class="form-group">
+                    <label>Descripción</label>
+                    <textarea id="actividadDescripcion" class="form-input" placeholder="Describe brevemente la actividad..." rows="10"></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                <button class="btn btn-primary" id="guardarBtn">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Confirmar Eliminación -->
+    <div class="modal-overlay" id="modalEliminar">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirmar Eliminación</h3>
+                <button class="close-modal" onclick="closeDeleteModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar esta actividad?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancelar</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Inscribir Alumno -->
+    <div class="modal-overlay" id="modalInscribir">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Inscribir Alumno al Grupo</h3>
+                <button class="close-modal" onclick="closeInscribirModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Matrícula</label>
+                    <input type="text" id="inscribirMatricula" class="form-input" placeholder="Ej. 2312345">
+                </div>
+                <div class="form-group">
+                    <label>ID de Grupo</label>
+                    <input type="number" id="inscribirGrupoId" class="form-input" placeholder="Ej. 12">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeInscribirModal()">Cancelar</button>
+                <button class="btn btn-primary" id="inscribirBtn">Inscribir</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="AdministrarParaescolar.js"></script>
+</body>
+</html>

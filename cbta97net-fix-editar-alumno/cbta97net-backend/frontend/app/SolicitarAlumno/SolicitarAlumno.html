@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buscar Alumno</title>
+    <link rel="stylesheet" href="../CrearGrupo/CrearNuevoGrupo.css" />
+    <link rel="stylesheet" href="SolicitarAlumno.css" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <img src="../resources/cbtalogo.jpeg" alt="Logo" class="logo" />
+                <div class="header-text">
+                    <h1>Consultar Alumno</h1>
+                    <p class="subtitle">Buscar por matrícula para ver la información detallada.</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="search-container">
+            <div class="form-field">
+                <label for="matricula-search">Buscar por Matrícula</label>
+                <input type="text" id="matricula-search" placeholder="Ingrese la matrícula del alumno..." />
+            </div>
+            <button class="btn btn-primary" id="btn-buscar">Buscar</button>
+        </div>
+        
+        <div id="status-message" class="status-message" style="display: none;"></div>
+
+        <hr />
+
+        <div id="detalle-alumno-container" style="display: none;">
+            
+            <div class="header-alumno">
+                <img id="detalle-foto" src="../resources/placeholder-user.webp" alt="Foto de perfil" />
+                <h2 id="detalle-nombre">Nombre del Alumno</h2>
+            </div>
+
+            <div class="grid-detalles">
+                <section class="detalle-card">
+                    <h3>Datos Personales</h3>
+                    <div class="info-grupo">
+                        <span class="info-label">Matrícula:</span>
+                        <span id="detalle-matricula">---</span>
+                    </div>
+                    <div class="info-grupo">
+                        <span class="info-label">CURP:</span>
+                        <span id="detalle-curp">---</span>
+                    </div>
+                    <div class="info-grupo">
+                        <span class="info-label">Nacimiento:</span>
+                        <span id="detalle-nacimiento">---</span>
+                    </div>
+                    <div class="info-grupo">
+                        <span class="info-label">NSS:</span>
+                        <span id="detalle-nss">---</span>
+                    </div>
+                    <div class="info-grupo">
+                        <span class="info-label">Póliza Seguro:</span>
+                        <span id="detalle-poliza">---</span>
+                    </div>
+                </section>
+
+                <section class="detalle-card">
+                    <h3>Tutoría</h3>
+                    <div class="info-grupo">
+                        <span class="info-label">Tutor Legal:</span>
+                        <span id="detalle-tutor-legal">---</span>
+                    </div>
+                    <div class="info-grupo">
+                        <span class="info-label">Tel. Tutor:</span>
+                        <span id="detalle-tutor-tel">---</span>
+                    </div>
+                    <hr class="card-divider">
+                    <div class="info-grupo">
+                        <span class="info-label">Tutor Académico:</span>
+                        <span id="detalle-tutor-academico">---</span>
+                    </div>
+                </section>
+
+                <section class="detalle-card">
+                    <h3>Área Educativa</h3>
+                    <div class="info-grupo">
+                        <span class="info-label">Condiciones Especiales:</span>
+                        <span id="detalle-condicion">---</span>
+                    </div>
+                    <div class="info-grupo" id="condicion-desc-container" style="display: none;">
+                        <span class="info-label">Descripción:</span>
+                        <p id="detalle-condicion-desc"></p>
+                    </div>
+                </section>
+
+                <section class="detalle-card">
+                    <h3>Documentos</h3>
+                    <ul id="documentos-lista">
+                        <li>---</li>
+                    </ul>
+                </section>
+            </div>
+
+        </div> </div> <script src="SolicitarAlumno.js"></script>
+</body>
+</html>

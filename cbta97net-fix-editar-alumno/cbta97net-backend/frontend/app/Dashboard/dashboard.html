@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - CBTANet</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="app-container">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h3>CBTA97Net</h3>
+            <span class="role-badge" id="userRoleBadge">Rol</span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="#" onclick="cargarInicio()" class="nav-link active">
+                        <span class="material-icons">home</span> Inicio
+                    </a>
+                </li>
+
+                <li class="nav-section-title">GESTIÓN ACADÉMICA</li>
+
+                <li>
+                    <a href="#" class="nav-link submenu-toggle">
+                        <span class="material-icons">class</span> Grupos
+                        <span class="material-icons dropdown-icon">expand_more</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="#" onclick="cargarModulo('../CrearGrupo/CrearNuevoGrupo.html', 'Crear Nuevo Grupo')">Crear Nuevo Grupo</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-section-title">PARAESCOLARES</li>
+
+                <li>
+                    <a href="#" class="nav-link submenu-toggle">
+                        <span class="material-icons">sports_soccer</span> Gestión Paraescolar
+                        <span class="material-icons dropdown-icon">expand_more</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="#" onclick="cargarModulo('../AdministrarParaescolares/AdministrarParaescolar.html', 'Administrar Paraescolares')">Administrar</a></li>
+                        <li><a href="#" onclick="cargarModulo('../InscribirAlumnoParaescolar/InscribirAlumnoParaescolar.html', 'Inscribir Alumno')">Inscribir Alumno</a></li>
+                        <li><a href="#" onclick="cargarModulo('../CrearGrupoParaescolares/CrearNuevoGrupoParaescolares.html', 'Crear Grupo Paraescolar')">Crear Grupo</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-section-title">PERSONAL & ALUMNOS</li>
+
+                <li>
+                    <a href="#" class="nav-link submenu-toggle">
+                        <span class="material-icons">school</span> Alumnos
+                        <span class="material-icons dropdown-icon">expand_more</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="#" onclick="cargarModulo('../RegistrarAlumno/RegistrarAlumno.html', 'Registrar Alumno')">Registrar Nuevo</a></li>
+                        <li><a href="#" onclick="cargarModulo('../SolicitarAlumno/SolicitarAlumno.html', 'Solicitar Expediente')">Solicitar Expediente</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button id="btnLogout" class="btn-logout">
+                <span class="material-icons">logout</span> Cerrar Sesión
+            </button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div class="page-title">
+                <h2 id="moduleTitle">Panel Principal</h2>
+            </div>
+            <div class="user-profile">
+                <div class="user-info">
+                    <span class="user-name" id="userNameDisplay">Usuario</span>
+                    <span class="user-id-display" id="userIdDisplay">ID: --</span>
+                </div>
+                <img src="../resources/placeholder-user.webp" alt="Perfil" class="avatar">
+            </div>
+        </header>
+
+        <div id="contentArea" class="content-wrapper">
+
+            <div id="welcomeContainer" class="welcome-banner">
+                <div class="banner-text">
+                    <h1>Bienvenido a CBTANet</h1>
+                    <p>Sistema de Gestión Escolar - CBTA 97 "Basconcobe"</p>
+                    <p class="date-display" id="fechaHoy"></p>
+                </div>
+                <div class="banner-icon">
+                    <span class="material-icons" style="font-size: 80px; color: var(--primary-green);">school</span>
+                </div>
+            </div>
+
+            <iframe id="mainFrame" class="module-iframe" src="" frameborder="0"></iframe>
+
+        </div>
+    </main>
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>
